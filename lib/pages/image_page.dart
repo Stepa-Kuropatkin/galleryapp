@@ -70,11 +70,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return CachedNetworkImage(
-                      imageUrl: item['urls']['full'],
-                      placeholder: (context, url) =>
-                          CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    return Dismissible(
+                      direction: DismissDirection.vertical,
+                      key: Key('key'),
+                      onDismissed: (_) => Navigator.of(context).pop(),
+                      child: CachedNetworkImage(
+                        imageUrl: item['urls']['full'],
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     );
                   }));
                 },
